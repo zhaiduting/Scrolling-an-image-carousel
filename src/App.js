@@ -8,10 +8,7 @@ export default function CatFriends() {
       <nav>
         <button
           onClick={() => {
-            let active = 0
-            if (index < catList.length - 1) {
-              active = index+1;
-            } 
+            const active = (index + 1) % catList.length
             setIndex(active)
             map.get(active)?.scrollIntoView({
               behavior: "smooth",
