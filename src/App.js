@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import { flushSync } from "react-dom";
 
 export default function CatFriends() {
   const map = useRef(new Map()).current;
@@ -9,17 +8,15 @@ export default function CatFriends() {
       <nav>
         <button
           onClick={() => {
-            flushSync(() => {
-              if (index < catList.length - 1) {
-                setIndex(index + 1);
-              } else {
-                setIndex(0);
-              }
-            });
-            map.get(index).scrollIntoView({
+            let active = 0
+            if (index < catList.length - 1) {
+              active = index+1;
+            } 
+            setIndex(active)
+            map.get(active)?.scrollIntoView({
               behavior: "smooth",
               block: "nearest",
-              inline: "center"
+              inline: "center",
             });
           }}
         >
@@ -48,6 +45,6 @@ const catList = [];
 for (let i = 0; i < 10; i++) {
   catList.push({
     id: i,
-    imageUrl: "https://placekitten.com/250/200?image=" + i
+    imageUrl: "https://placekitten.com/250/200?image=" + i,
   });
 }
